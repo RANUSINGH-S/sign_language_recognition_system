@@ -39,7 +39,7 @@ imgSize = 300
 counter = 0
 
 # Set the folder for saving images
-folder = "C:/Users/ranus/OneDrive/Documents/Desktop/Sign Language Detection/Data/Please"
+folder = "Data/Okay"
 
 # Make sure the folder exists
 os.makedirs(folder, exist_ok=True)

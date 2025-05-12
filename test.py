@@ -35,7 +35,11 @@ cap = cv2.VideoCapture(0)
 offset = 20
 imgSize = 300
 
-print("Starting simplified hand detection...")
+# These labels will be displayed when a hand is detected
+# Since we don't have a trained model, we'll just show "Hand Detected" instead
+labels = ["Hello", "I love you", "No", "Okay", "Please", "Thank you", "Yes"]
+
+print("Starting hand detection...")
 print("Press 'q' to quit")
 
 while True:
@@ -83,18 +87,19 @@ while True:
             imgWhite[hGap: hCal + hGap, :] = imgResize
 
         # Draw rectangle and label
-        cv2.rectangle(imgOutput, (x, y), (x + w, y + h), (0, 255, 0), 2)
-        cv2.putText(imgOutput, "Hand Detected", (x, y-10), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 255, 0), 2)
+        cv2.rectangle(imgOutput, (x-offset, y-offset-70), (x-offset+400, y-offset+60-50), (0, 255, 0), cv2.FILLED)
+        cv2.putText(imgOutput, "Hand Detected", (x, y-30), cv2.FONT_HERSHEY_COMPLEX, 1, (0, 0, 0), 2)
+        cv2.rectangle(imgOutput, (x-offset, y-offset), (x+w+offset, y+h+offset), (0, 255, 0), 4)
 
         # Show the cropped and processed images
-        cv2.imshow('Hand Crop', imgCrop)
-        cv2.imshow('Processed Hand', imgWhite)
+        cv2.imshow('ImageCrop', imgCrop)
+        cv2.imshow('ImageWhite', imgWhite)
 
     # Show the skin detection mask
     cv2.imshow('Skin Mask', skin_mask)
 
     # Show the main output
-    cv2.imshow('Hand Detection', imgOutput)
+    cv2.imshow('Image', imgOutput)
 
     # Check for key press
     key = cv2.waitKey(1)
